@@ -1,24 +1,10 @@
 <template>
     <div id="app">
-        <newComponent/>
-        
-        <nav>
-            <router-link to="/">Home</router-link> |
-            <router-link to="/about">About</router-link> |
-            <router-link to="/register">Register comp.</router-link>
-        </nav>
+        <router-view/>
     </div>
 </template>
 
-<script>
-import newComponent from './components/newComponent.vue';
-export default {
-    name: 'App',
-    components: {
-        newComponent
-    }
-}
-</script>
+
 
 <style>
 #app {
@@ -26,7 +12,7 @@ export default {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
+    color: white;
 }
 
 nav {
