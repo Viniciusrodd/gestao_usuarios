@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1 class="title is-1">Registro de usuário</h1>
+        <h1 class="title is-1">Login de usuário</h1>
         <br>
         <div class="columns is-centered">
             <div class="column is-half">
@@ -8,13 +8,8 @@
                     {{errorVar}}
                 </div>
                 <div v-if="sucessVar != undefined" class="notification is-primary">
-                    {{sucessVar}} <br>
-                    você será redirecionado á homepage em 3..2..1
+                    {{sucessVar}}
                 </div>
-
-                <label for="nome">Nome:</label>
-                <input v-model="name" name="nome" class="input" type="text" placeholder="Nome de usuário"/>
-                <hr>
 
                 <label for="email">Email:</label>
                 <input v-model="email" name="email" class="input" type="email" placeholder="email@email.com"/>
@@ -23,7 +18,9 @@
                 <label for="senha">Senha:</label>
                 <input v-model="password" name="senha" class="input" type="password" placeholder="******"/>
                 
-                <button @click="register" class="button is-primary" style="margin-top: 20px">Cadastrar</button>
+                <button @click="login" class="button is-primary" style="margin-top: 20px">
+                    Logar
+                </button>
             </div>
         </div>
     </div>
@@ -37,27 +34,22 @@ import axios from 'axios';
 export default {
     data(){
         return {
-            name: '',
             email: '',
             password: '',
             errorVar: undefined,
-            sucessVar: undefined
+            sucessVar: undefined,
+            tokenVar: ''
         }
     },
 
     methods: {
-        register(){
-            axios.post('http://localhost:8687/user', {
-                nameVar: this.name,
+        login(){
+            axios.post('http://localhost:8687/login', {
                 emailVar: this.email,
                 passwordVar: this.password
             })
             .then((res) =>{
-                this.sucessVar = res.data
-                setTimeout(() => {
-                    this.sucessVar = undefined
-                    this.$router.push({name: 'home'})
-                }, 3000);
+                localStorage.setItem('token', res.data.token)
             })
             .catch((error) =>{
                 this.errorVar = error.response.data  
