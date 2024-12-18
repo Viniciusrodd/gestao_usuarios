@@ -4,6 +4,13 @@
         <br>
         <div class="columns is-centered">
             <div class="column is-half">
+                <div v-if="errorVar != undefined" class="notification is-danger is-light">
+                    {{errorVar}}
+                </div>
+                <div v-if="sucessVar != undefined" class="notification is-primary">
+                    {{sucessVar}}
+                </div>
+
                 <label for="nome">Nome:</label>
                 <input v-model="name" name="nome" class="input" type="text" placeholder="Nome de usuário"/>
                 <hr>
@@ -31,14 +38,32 @@ export default {
         return {
             name: '',
             email: '',
-            password: ''
+            password: '',
+            errorVar: undefined,
+            sucessVar: undefined
         }
     },
 
     methods: {
         register(){
-            axios.get('http://localhost:8686/')
-
+            axios.post('http://localhost:8687/user', {
+                nameVar: this.name,
+                emailVar: this.email,
+                passwordVar: this.password
+            })
+            .then((res) =>{
+                this.sucessVar = res.data
+                setTimeout(() => {
+                    this.sucessVar = undefined
+                }, 3000);
+            })
+            .catch((error) =>{
+                this.errorVar = error.response.data  
+                setTimeout(() => {
+                    this.errorVar = undefined
+                }, 3000);
+                console.log('error ' + error.response.data)
+            }) 
         }
     }
 }
