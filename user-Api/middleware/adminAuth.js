@@ -17,7 +17,10 @@ module.exports = function(req, res, next){
         var encoded = jwt.verify(tokenVar, secretToken);
 
         if(encoded.role < 1){
-            return res.status(403).send('(Unauthorized) You`re not a admin, my friend');
+            return res.status(403).send({
+                status: false,
+                error: '(Unauthorized) You`re not a admin, my friend'
+            });
         }else{
             console.log(encoded);
             next();        

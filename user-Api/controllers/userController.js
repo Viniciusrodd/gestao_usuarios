@@ -128,14 +128,7 @@ class userController{
                     error: 'User email not found'
                 })
             }
-
-            if(userData.role < 1){
-                return res.status(404).send({
-                    status: false, 
-                    error: 'Unauthorized User'
-                })
-            }
-
+            
             var result = await bcrypt.compare(passwordVar, userData.password)
             if(!result){
                 return res.status(406).send({

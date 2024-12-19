@@ -3,7 +3,29 @@ import HomeView from '../views/HomeView.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import Users from '../views/Users.vue'
+import axios from 'axios';
 
+function adminAuth(to, from, next){
+    if(!localStorage.getItem('token')){
+        next('/login');
+    }else{
+        var req = {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        }
+        console.log(req)
+        axios.post('http://localhost:8687/validate', {}, req)
+            .then((data) =>{
+                console.log(data)
+                next();
+            })
+            .catch((error) =>{
+                console.log('error at validate beforeEnter', error.response.data.error)
+                next('/login')
+            })
+    }
+}
 
 const routes = [
     {
@@ -33,13 +55,7 @@ const routes = [
         path: '/admin/users',
         name: 'users',
         component: Users,
-        beforeEnter: (to, from, next) =>{
-            if(!localStorage.getItem('token')){
-                next('/login');
-            }else{
-                next();
-            }
-        }
+        beforeEnter: adminAuth
     }
 ]
 
