@@ -50,13 +50,14 @@ export default {
             })
             .then((res) =>{
                 localStorage.setItem('token', res.data.token)
+                this.$router.push('/admin/users')
             })
             .catch((error) =>{
-                this.errorVar = error.response.data  
+                this.errorVar = error.response.data.error
                 setTimeout(() => {
                     this.errorVar = undefined
                 }, 3000);
-                console.log('error ' + error.response.data)
+                console.log('error ' + error.response.data.error)
             }) 
         }
     }

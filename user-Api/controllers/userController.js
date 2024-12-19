@@ -129,6 +129,13 @@ class userController{
                 })
             }
 
+            if(userData.role < 1){
+                return res.status(404).send({
+                    status: false, 
+                    error: 'Unauthorized User'
+                })
+            }
+
             var result = await bcrypt.compare(passwordVar, userData.password)
             if(!result){
                 return res.status(406).send({
@@ -145,7 +152,7 @@ class userController{
             return res.status(200).json({
                 status: true, 
                 result: result,
-                token: tokenVar
+                token: tokenVar,
             })    
         }
         catch(error){
