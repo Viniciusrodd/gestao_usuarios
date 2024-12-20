@@ -12,7 +12,9 @@ class userController{
 
     async findUsers(req, res){
         var usersFinded = await usersModel.findAll();
-        res.status(200).json(usersFinded);
+        res.status(200).send({
+            users: usersFinded
+        });
     }
 
     async findUsersbyId(req, res){
