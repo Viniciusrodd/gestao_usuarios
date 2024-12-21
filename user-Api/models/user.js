@@ -150,7 +150,6 @@ class users{
             await knexBd('users').where({ 
                 id: idVar 
             }).delete();
-            console.log(`Sucess user delete by id: ${idVar}`);
             return {
                 status:true
             };  

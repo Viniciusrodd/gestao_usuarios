@@ -14,10 +14,8 @@ function adminAuth(to, from, next){
                 authorization: `Bearer ${localStorage.getItem('token')}`
             }
         }
-        console.log(req)
         axios.post('http://localhost:8687/validate', {}, req)
-            .then((data) =>{
-                console.log(data)
+            .then(() =>{
                 next();
             })
             .catch((error) =>{

@@ -22,7 +22,6 @@ module.exports = function(req, res, next){
                 error: '(Unauthorized) You`re not a admin, my friend'
             });
         }else{
-            console.log(encoded);
             next();        
         }
     }
