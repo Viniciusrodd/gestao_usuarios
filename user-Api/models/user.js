@@ -91,10 +91,9 @@ class users{
         }
     }
 
-    async updateUsers(idVar, nameVar, emailVar, roleVar){
+    async updateUsers(idVar, nameVar, emailVar){
         try{
             var user = await this.findById(idVar);
-            var emailExist = await this.findEmail(emailVar);
             var editUser = {};
 
             if(!user){
@@ -115,10 +114,6 @@ class users{
 
             if(nameVar != undefined){
                 editUser.name = nameVar
-            }
-
-            if(roleVar != undefined){
-                editUser.role = roleVar
             }
 
             await knexBd.update(editUser).where({

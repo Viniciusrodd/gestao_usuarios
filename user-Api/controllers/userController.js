@@ -24,7 +24,7 @@ class userController{
         if(!userFinded){
             res.status(404).json({});
         }else{
-            res.status(200).send(userFinded);
+            res.send(userFinded);
         }
     }
 
@@ -56,7 +56,7 @@ class userController{
     async editUsers(req, res){
         var {id, name, email, role} = req.body;
 
-        var result = await usersModel.updateUsers(id, name, email, role);
+        var result = await usersModel.updateUsers(id, name, email);
         if(result.status){
             res.status(200).send('Users updated');
         }else{

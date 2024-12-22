@@ -59,7 +59,7 @@ const routes = [
         beforeEnter: adminAuth
     },
     {
-        path: '/users/edit/:id',
+        path: '/user/edit/:id',
         name: 'edit',
         component: Edit,
         beforeEnter: adminAuth
