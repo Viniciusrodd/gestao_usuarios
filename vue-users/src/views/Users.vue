@@ -18,11 +18,11 @@
                         <tr v-for="user in users" :key="user.id">
                             <td>{{user.name}}</td>
                             <td>{{user.email}}</td>
+                            <td>{{isAdmin(user.role)}}</td>
                             <td>
-                                {{isAdmin(user.role)}}
-                            </td>
-                            <td>
-                                <button class="button is-success">Editar</button> | 
+                                <router-link :to="{name: 'edit', params:{id: user.id}}">
+                                    <button class="button is-success">Editar</button>
+                                </router-link> | 
                                 <button class="button is-danger" @click="modalActive(user.id)">Deletar</button>
                             </td>
                         </tr>
