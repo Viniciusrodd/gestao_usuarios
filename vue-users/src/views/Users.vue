@@ -93,7 +93,7 @@ export default {
                 .then(() =>{
                     console.log('User success deleted')
                     this.isModal = false
-                    window.location.reload()
+                    this.users = this.users.filter(u => u.id != this.idUser);
                     alert('Usuário deletado com sucesso')
                 })
                 .catch((error) =>{
